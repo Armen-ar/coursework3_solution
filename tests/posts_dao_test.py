@@ -5,11 +5,11 @@ from app.posts.dao.posts_dao import PostsDao
 
 class TestsPostsDao:
 
-    @pytest.fixture  # фикстура для тестирования
+    @pytest.fixture
     def post_dao(self):
-        return PostsDao('../data/posts.json')
+        return PostsDao('data/posts.json')
 
-    @pytest.fixture  # фикстура для тестирования
+    @pytest.fixture
     def keys_expected(self):
         return {"poster_name", "poster_avatar", "pic", "content", "views_count", "likes_count", "pk"}
 
@@ -69,4 +69,3 @@ class TestsPostsDao:
     #         post_pks.add(post['pk'])
     #
     #     assert post_pks == post_pks_correct, "Поиск работает некорректно"
-    

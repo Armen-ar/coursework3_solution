@@ -7,7 +7,7 @@ class PostsDao:
     def __init__(self, path):
         self.path = path
 
-    def _load(self):
+    def _load_posts(self):
         """Открывает json файл и сохраняет в виде списка словарей"""
         with open(f"{self.path}", "r", encoding="utf-8") as file:
             data = json.load(file)
@@ -15,7 +15,7 @@ class PostsDao:
 
     def get_all(self):
         """Возвращает все посты"""
-        return self._load()
+        return self._load_posts()
 
     def get_by_pk(self, pk):
         """Возвращает пост по номеру"""
