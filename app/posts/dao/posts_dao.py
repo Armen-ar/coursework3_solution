@@ -40,10 +40,11 @@ class PostsDao:
         """Возвращает пост по вхождению"""
         posts = self.get_all()
         matching_posts = []
-        query_lower = query.lower
+        query_lower = query.lower()
 
         for post in posts:
-            if query_lower in post['content'].lower:
+            if query_lower in post['content'].lower():
                 matching_posts.append(post)
 
         return matching_posts
+

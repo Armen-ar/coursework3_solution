@@ -21,5 +21,3 @@ class CommentsDao:
             if comment['post_pk'] == post_pk:
                 comments_by_pk.append(comment)
         return comments_by_pk
-
-

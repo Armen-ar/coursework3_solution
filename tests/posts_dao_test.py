@@ -7,7 +7,7 @@ class TestsPostsDao:
 
     @pytest.fixture
     def post_dao(self):
-        return PostsDao('data/posts.json')
+        return PostsDao('data/posts.json')  # если тестировать через интерфейс, тогда путь должен начинаться с '../'
 
     @pytest.fixture
     def keys_expected(self):
@@ -59,13 +59,13 @@ class TestsPostsDao:
 
     """Поиск постов"""
 
-    # post_parameters_search = [('погулять', {2}), ('бассейна', {4}), ('фотка', {5})]
-    #
-    # @pytest.mark.parametrize('query, post_pks_correct', post_parameters_search)
-    # def test_search_for_posts(self, post_dao, query, post_pks_correct):
-    #     posts = post_dao.search(query)
-    #     post_pks = set()
-    #     for post in posts:
-    #         post_pks.add(post['pk'])
-    #
-    #     assert post_pks == post_pks_correct, "Поиск работает некорректно"
+    post_parameters_search = [('погулять', {2}), ('бассейна', {4}), ('фотка', {5})]
+
+    @pytest.mark.parametrize('query, post_pks_correct', post_parameters_search)
+    def test_search_for_posts(self, post_dao, query, post_pks_correct):
+        posts = post_dao.search(query)
+        post_pks = set()
+        for post in posts:
+            post_pks.add(post['pk'])
+
+        assert post_pks == post_pks_correct, "Поиск работает некорректно"
