@@ -1,0 +1,19 @@
+[{
+    "post_pk": 1,
+    "commenter_name": "leo",
+    "comment": "Интересно. А где это?" ,
+    "pk": 1
+  },
+   {
+    "post_pk": 1,
+    "commenter_name": "hank",
+    "comment": "Интересно. А где это?" ,
+    "pk": 7
+  },
+   {
+    "post_pk": 2,
+    "commenter_name": "larry",
+    "comment": "Интересно. А где это?" ,
+    "pk": 13
+  }
+]

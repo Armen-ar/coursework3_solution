@@ -46,26 +46,48 @@ class TestsPostsDao:
 
     """Получение поста по пользователю"""
 
-    post_parameters_by_user = [('leo', {1, 5}), ('larry', {4, 8}), ('hank', {3, 7})]
+    def test_get_by_user_check_type(self, post_dao):
+        posts = post_dao.get_by_user('leo')
+        assert type(posts) == list, "Пост должен быть списком"
+        assert type(posts[0]) == dict, "Элемент должен быть словарём"
+
+    def test_get_by_user_has_keys(self, post_dao, keys_expected):
+        post = post_dao.get_by_user('leo')[0]
+        post_keys = set(post.keys())
+        assert post_keys == keys_expected, "Полученные ключи неверны"
+
+    post_parameters_by_user = [('leo', [1, 5]), ('larry', [4, 8]),
+                               ('hank', [3, 7]), ('Арутюнян Армен', [])]
 
     @pytest.mark.parametrize('poster_name, post_pks_correct', post_parameters_by_user)
     def test_get_posts_by_user(self, post_dao, poster_name, post_pks_correct):
         posts = post_dao.get_by_user(poster_name)
-        post_pks = set()
+        post_pks = []
         for post in posts:
-            post_pks.add(post['pk'])
+            post_pks.append(post['pk'])
 
         assert post_pks == post_pks_correct, "Поиск по пользователю работает некорректно"
 
     """Поиск постов"""
 
-    post_parameters_search = [('погулять', {2}), ('бассейна', {4}), ('фотка', {5})]
+    def test_search_check_type(self, post_dao):
+        posts = post_dao.search('а')
+        assert type(posts) == list, "Посты должны быть списком"
+        assert type(posts[0]) == dict, "Каждый пост должен быть словарём"
+
+    def test_search_has_keys(self, post_dao, keys_expected):
+        post = post_dao.search('а')[0]
+        post_keys = set(post.keys())
+        assert post_keys == keys_expected, "Полученные ключи неверны"
+
+    post_parameters_search = [('0000000', []), ('погулять', [2]),
+                              ('бассейна', [4]), ('фотка', [5]), ('Фотка', [5])]
 
     @pytest.mark.parametrize('query, post_pks_correct', post_parameters_search)
     def test_search_for_posts(self, post_dao, query, post_pks_correct):
         posts = post_dao.search(query)
-        post_pks = set()
+        post_pks = []
         for post in posts:
-            post_pks.add(post['pk'])
+            post_pks.append(post['pk'])
 
         assert post_pks == post_pks_correct, "Поиск работает некорректно"

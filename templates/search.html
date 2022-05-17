@@ -25,31 +25,37 @@
   </header>
   <main class="container">
     <div class="search">
-      <p class="search__results">Найдено {{ number_of_posts_by_query }} постов</p>
+      <form action="/search" class="search__form">
+        <input name="s" type="search" class="search__input" value="{{ query }}">
+      </form>
+      <p class="search__results">Найдено постов: {{ number_of_posts }}</p>
     </div>
-    <section class="items">
+    {% if query == "" %}
+    <p> Вы не ввели поисковую строку<p>
+    {% else %}
+      <section class="items">
+      {% for post in posts %}
       <div class="items__item item">
         <div class="item__top">
-          {% for post_by_query in posts_by_query %}
-          <a href="/users/{{ post_by_query.poster_name }}/" class="item__head">
+          <a href="/users/{{ post.poster_name }}" class="item__head">
             <div class="item__ava-wrap">
-              <img src="{{ post_by_query.poster_avatar }}" alt="" class="item__ava" width="47">
+              <img src="{{ post.poster_avatar }}" alt="" class="item__ava" width="47">
             </div>
-            <span class="item__username">{{ post_by_query.poster_name }}</span>
+            <span class="item__username">{{ post.poster_name }}</span>
           </a>
         </div>
-        <a href="/posts/{{ post_by_query.pk }}" class="item__post-link">
-          <img src="{{ post_by_query.pic }}" alt="" width="348" class="item__post-img">
+        <a href="/posts/{{ post.pk }}" class="item__post-link">
+          <img src="{{ post.pic }}" alt="" width="348" class="item__post-img">
         </a>
-        <p class="item__descr"><a href="/tag.html" class="item__tag">#food</a>{{ post_by_query.content }}</p>
+        <p class="item__descr">{{ post.content }}</p>
         <div class="item__post-info">
           <div class="item__counter">
             <img src="/static/img/eye.png" alt="" class="item__counter-icon" width="26">
-            <span class="item__counter-text">{{ post_by_query.views_count }}</span>
+            <span class="item__counter-text"> {{ post.views_count }}</span>
           </div>
         </div>
         <div class="item__post-bottom">
-          <a href="/posts/{{ post_by_query.pk }}" class="item__btn-more">Подробнее</a>
+          <a href="/posts/{{ post.pk }}" class="item__btn-more">Подробнее</a>
           <button type="button" class="item__bookmark-btn">
             <img src="/static/img/bookmark.png" alt="" class="item__bookmark-icon" width="24">
           </button>
@@ -57,6 +63,7 @@
       </div>
       {% endfor %}
     </section>
+    {% endif %}
   </main>
   <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
     <symbol id="back" viewbox="0 0 19 16" fill="none" width="19" height="16">

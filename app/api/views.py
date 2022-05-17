@@ -2,7 +2,7 @@ import logging
 
 from flask import Blueprint, render_template, jsonify
 from app.posts.dao.posts_dao import PostsDao
-from app.posts.dao.coments_dao import CommentsDao
+from app.posts.dao.comments_dao import CommentsDao
 
 api_blueprint = Blueprint("api_blueprint", __name__, template_folder='templates')
 

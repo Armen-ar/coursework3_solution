@@ -23,12 +23,12 @@
     </div>
   </header>
  <main class="container">
-    <div class="search">
-      <form action="/users/{{ posts_by_query }}" class="search__form">
-        <input type="search" class="search__input">
+       <div class="search">
+      <form action="/search" class="search__form">
+        <input name="s" type="search" class="search__input">
       </form>
-      <p class="search__results">Поиск постов по вхождению</p>
-    </div>
+         <p class="search__results"> Поисковая строка</p>
+       </div>
   <main class="container">
     <section class="items">
       {% for post in posts %}
