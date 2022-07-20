@@ -1,6 +1,6 @@
 import logging
 
-from flask import Blueprint, render_template, jsonify
+from flask import Blueprint, jsonify
 from app.posts.dao.posts_dao import PostsDao
 from app.posts.dao.comments_dao import CommentsDao
 

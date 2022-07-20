@@ -59,3 +59,4 @@ def post_by_user(username):
         return render_template('user_feed.html', posts_by_user=posts_by_user, number_of_posts=number_of_posts)
     except:
         return "Ошибка открытия поста по имени"
+
